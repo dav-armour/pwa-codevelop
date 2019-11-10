@@ -1,0 +1,96 @@
+/* colours */
+:root{
+  --primary: #35404e;
+  --secondary: #28c6c7;
+  --title: #66fcf1;
+}
+
+/* layout styles */
+nav{
+  background: var(--primary);
+  border-bottom: 10px solid var(--primary);
+}
+nav a{
+  text-transform: uppercase;
+  color: var(--title);
+}
+nav a span{
+  font-weight: bold;
+}
+nav .sidenav-trigger{
+  margin: 0;
+}
+
+nav .sidenav-trigger:hover{
+  cursor: pointer;
+}
+
+/* book styles */
+.books{
+  margin-top: 20px;
+}
+.card-panel.book{
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0px 1px 3px rgba(90,90,90,0.1);
+  display: grid;
+  grid-template-columns: 2fr 6fr 1fr;
+  grid-template-areas: "image details delete";
+  position: relative;
+}
+.book img{
+  grid-area: image;
+  max-width: 60px;
+}
+.book-details{
+  grid-area: details;
+  margin-top: 6px;
+}
+.book-delete{
+  grid-area: delete;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+}
+.book-delete:hover {
+  cursor: pointer;
+}
+.book-delete i{
+  font-size: 18px;
+}
+.book-title{
+  font-weight: bold;
+}
+.book-author{
+  font-size: 0.8em;
+}
+
+/* form-styles */
+.add-btn{
+  background: var(--secondary);
+}
+.add-btn:hover{
+  background: var(--secondary);
+}
+input{
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+}
+input:focus{
+  border-bottom: 1px solid var(--secondary) !important;
+  -webkit-box-shadow: 0 1px 0 0 var(--secondary) !important;
+  box-shadow: 0 1px 0 0 var(--secondary) !important;
+}
+input:focus + label{
+  color: var(--secondary) !important;
+}
+.side-form button{
+  background: var(--secondary);
+  box-shadow: 1px 1px 3px rgba(90,90,90,0.2);
+}
+.side-form button:hover{
+  background: var(--secondary);
+}
+form .input-field{
+  margin-top: 30px;
+}
