@@ -1,4 +1,11 @@
 {
+  "name": "Book List",
+  "short_name": "BookList",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#28c6c7",
+  "theme_color": "#35404e",
+  "orientation": "portrait-primary",
   "icons": [
     {
       "src": "/img/icons/icon-72x72.png",
