@@ -57,6 +57,7 @@ self.addEventListener('activate', event => {
 // Fetch event
 self.addEventListener('fetch', event => {
   // console.log("Fetch event", event);
+  if (event.request.url.includes('firestore.googleapis.com')) return;
   event.respondWith(
     caches.match(event.request)
       .then(cacheRes => {
