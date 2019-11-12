@@ -14,6 +14,18 @@ const assetUrls = [
   '/pages/fallback.html'
 ];
 
+// cache size limit function
+const limitCacheSize = (name, size) => {
+  caches.open(name).then(cache => {
+    cache.keys()
+      .then(keys => {
+        if (keys.length > size) {
+          cache.delete(keys[0]).then(limitCacheSize(name, size));
+        }
+      })
+  })
+}
+
 // Install event
 self.addEventListener('install', event => {
   // console.log("Service worker installed");
@@ -33,7 +45,7 @@ self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys()
       .then(keys => {
-        // console.log(keys); boom
+        // console.log(keys);
         return Promise.all(keys
           .filter(key => key !== staticCacheName && key !== dynamicCacheName)
           .map(key => caches.delete(key))
@@ -47,16 +59,17 @@ self.addEventListener('fetch', event => {
   // console.log("Fetch event", event);
   event.respondWith(
     caches.match(event.request)
-      .then(cahceRes => {
-        return cahceRes || fetch(event.request).then(fetchRes => {
+      .then(cacheRes => {
+        return cacheRes || fetch(event.request).then(fetchRes => {
           return caches.open(dynamicCacheName).then(cache => {
             cache.put(event.request, fetchRes.clone());
+            limitCacheSize(dynamicCacheName, 15);
             return fetchRes;
           })
         });
       })
       .catch(() => {
-        if (event.request.url.indexOf('.html') !== -1) {
+        if (event.request.url.includes('.html')) {
           return caches.match('/pages/fallback.html')
         }
       })
